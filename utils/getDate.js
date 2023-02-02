@@ -1,61 +1,73 @@
 var year = new Date().getFullYear();
 export let birthdays = [
   {
+    id: 0,
     year: year,
     name: "Tara",
     date: `${year}-01-19T00:00:00`,
   },
   {
+    id: 1,
     year: year,
     name: "Dusan(Avala)",
     date: `${year}-02-27T00:00:00`,
   },
   {
+    id: 2,
     year: year,
     name: "Natalija",
-    date: `${year}03-29T00:00:00`,
+    date: `${year}-03-29T00:00:00`,
   },
   {
+    id: 3,
     year: year,
     name: "Vladan",
     date: `${year}-04-10T00:00:00`,
   },
   {
+    id: 4,
     year: year,
     name: "Jana",
     date: `${year}-08-01T00:00:00`,
   },
   {
+    id: 5,
     year: year,
     name: "Filip",
     date: `${year}-08-20T00:00:00`,
   },
   {
+    id: 6,
     year: year,
     name: "Nixa",
     date: `${year}-09-02T00:00:00`,
   },
   {
+    id: 7,
     year: year,
     name: "Alex",
     date: `${year}-10-12T00:00:00`,
   },
   {
+    id: 8,
     year: year,
     name: "Tonic",
     date: `${year}-10-21T00:00:00`,
   },
   {
+    id: 9,
     year: year,
     name: "Flora",
     date: `${year}-11-28T00:00:00`,
   },
   {
+    id: 10,
     year: year,
     name: "Dimi",
     date: `${year}-12-04T00:00:00`,
   },
   {
+    id: 11,
     year: year,
     name: "Dusan(Souly) and Toza",
     date: `${year}-12-12T00:00:00`,
@@ -134,43 +146,3 @@ export function showRemaining() {
   }
   return timeArr;
 }
-//Generate data
-//   const dataScroll = document.querySelector(".data-scroll");
-//   const months = [
-//     "Jan",
-//     "Feb",
-//     "Mar",
-//     "Apr",
-//     "May",
-//     "Jun",
-//     "Jul",
-//     "Aug",
-//     "Sep",
-//     "Oct",
-//     "Nov",
-//     "Dec",
-//   ];
-
-//   const generateData = () => {
-//     let htmlString = "";
-
-//     for (let i = 0; i < birthdays.length; i++) {
-//       let month = parseInt(birthdays[i].date[5] + birthdays[i].date[6]);
-//       let day = birthdays[i].date[8] + birthdays[i].date[9];
-
-//       htmlString += `<div class="row">
-//     <p class="name">${birthdays[i].name}</p>
-//     <div class="menu-date">
-//     <p class="menu-month">${months[month - 1]}</p>
-//     <p class="menu-day">${day}</p>
-//     </div>
-//   </div>`;
-//     }
-//     dataScroll.innerHTML = htmlString;
-
-//     // const currentDate = new Date().toString().split(" ");
-//     // const today = (document.querySelector(
-//     //   ".date-number"
-//     // ).innerHTML = `${currentDate[2]} ${currentDate[1]} ${currentDate[3]}`);
-//   };
-//   generateData();
