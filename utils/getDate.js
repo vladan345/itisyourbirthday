@@ -1,5 +1,5 @@
 var year = new Date().getFullYear();
-let birthdays = [
+export let birthdays = [
   {
     year: year,
     name: "Tara",

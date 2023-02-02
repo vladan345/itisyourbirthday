@@ -2,6 +2,7 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import Clock from "@/components/Clock";
 import Footer from "@/components/Footer";
+import BirthdayList from "@/components/BirthdayList";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <div className={styles.App}>
         <Clock />
         <Footer />
+        <BirthdayList />
       </div>
     </>
   );
