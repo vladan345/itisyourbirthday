@@ -6,7 +6,7 @@ let prevDate = {
 };
 
 export function updateDisplay(value, unit) {
-  if (value !== prevDate) {
+  if (value !== prevDate[unit]) {
     animate(prevDate[unit], value, unit);
   } else {
     document.querySelector(`#${unit} .topFront span`).innerHTML = value;
@@ -23,16 +23,15 @@ export function animate(prev, value, unit) {
   document.querySelector(`#${unit} .bottomFront span`).innerHTML = prev;
   document.querySelector(`#${unit} .topBack span`).innerHTML = value;
   document.querySelector(`#${unit} .bottomBack span`).innerHTML = value;
-
   var topFront = document.querySelector(`#${unit} .topFront`);
   var bottomBack = document.querySelector(`#${unit} .bottomBack`);
   topFront.classList.add("flipped-top");
   bottomBack.classList.add("flipped-bottom");
 
-  bottomBack.addEventListener("transitionend", () => {
+  bottomBack.ontransitionend = () => {
     topFront.classList.remove("flipped-top");
     bottomBack.classList.remove("flipped-bottom");
     document.querySelector(`#${unit} .topFront span`).innerHTML = value;
     document.querySelector(`#${unit} .bottomFront span`).innerHTML = value;
-  });
+  };
 }
