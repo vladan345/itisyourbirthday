@@ -204,3 +204,16 @@ div.menuOpened {
     transform: rotateX(0deg) skewX(0deg);
   }
 }
+@media only screen and (max-width: 900px) {
+  html {
+    font-size: 62.5%;
+  }
+  body {
+    background-size: 300%, cover, contain;
+  }
+}
+@media only screen and (max-width: 400px) {
+  html {
+    font-size: 50%;
+  }
+}
