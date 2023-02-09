@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@700&display=swap");
 * {
   box-sizing: border-box;
   padding: 0;
@@ -9,6 +10,43 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
 }
+
+.App {
+  min-height: 100vh;
+  width: 100%;
+  background: url("/pattern-hills.svg"), url("/bg-stars.svg"),
+    -webkit-gradient(linear, left top, left bottom, from(#191a24), to(#1e1f29));
+  background: url("/pattern-hills.svg"), url("/bg-stars.svg"),
+    linear-gradient(#191a24, #1e1f29);
+  background-size: contain, cover, contain;
+  background-repeat: no-repeat;
+  background-position: right bottom, center, center;
+  color: #f4f4f4;
+  font-family: "Red Hat Text", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.userLink {
+  display: flex;
+  position: absolute;
+  right: 85px;
+  top: 20px;
+  z-index: 11;
+  background-color: hsl(236, 21%, 26%);
+  width: 45px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.1);
+}
+.userLink img {
+  filter: invert(54%) sepia(85%) saturate(2047%) hue-rotate(309deg)
+    brightness(99%) contrast(98%);
+}
+
 h2 {
   color: #fb6087;
   background-color: #343650;

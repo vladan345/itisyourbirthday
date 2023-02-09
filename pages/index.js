@@ -1,5 +1,7 @@
 import Head from "next/head";
-import styles from "@/styles/Home.module.css";
+import Link from "next/link";
+import Image from "next/image";
+
 import Clock from "@/components/Clock";
 import Footer from "@/components/Footer";
 import BirthdayList from "@/components/BirthdayList";
@@ -13,10 +15,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles.App}>
+      <div className="App">
         <Clock />
         <Footer />
         <BirthdayList />
+        <Link href="/user" className="userLink">
+          <Image width={30} height={30} src="/user-icon.svg" alt="user icon" />
+        </Link>
       </div>
     </>
   );

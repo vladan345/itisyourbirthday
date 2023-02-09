@@ -9,7 +9,7 @@ export default function Footer() {
         <i className={styles.instagram}></i>
       </div>
       <div className={styles.attribution}>
-        Challenge by
+        Challenge by{" "}
         <a
           href="https://www.frontendmentor.io?ref=challenge"
           target="_blank"
