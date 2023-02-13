@@ -8,20 +8,42 @@ function AdminCheck() {
   const [name, setName] = useState("");
   const [month, setMonth] = useState(0);
   const [day, setDay] = useState(0);
+  const [isValidMessage, setIsValidMessage] = useState("");
+
+  const validation = () => {
+    let months = [1, 3, 5, 7, 8, 10, 12];
+    if (month < 1 || month > 12 || day < 1 || day > 31) {
+      return "MONTH or DAY is invalid.";
+    } else if (month == 2 && new Date().getFullYear() % 4 !== 0 && day > 28) {
+      return "February only has 28 days this year (29 on leap years).";
+    } else if (month == 2 && new Date().getFullYear() % 4 === 0 && day > 29) {
+      return "It's leap year and February only has 29 days.";
+    } else if (!months.includes(parseInt(month)) && day > 30) {
+      return "Choosen month has only 30 days.";
+    } else {
+      return "";
+    }
+  };
 
   const saveBirthday = async () => {
-    // let res = await fetch("/api/birthday", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     year: "2023",
-    //     name: "Natalija",
-    //     date: "2023-03-29T00:00:00",
-    //   }),
-    // });
-    // const newBirthday = await res.json();
-    // console.log("Create successful", { newBirthday });
-    console.log(name, month, day);
+    const isValid = validation();
+    setIsValidMessage(isValid);
+
+    if (isValid === "") {
+      let res = await fetch("/api/birthday", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          year: parseInt(new Date().getFullYear()),
+          name: name,
+          date: `${new Date().getFullYear()}-${
+            month < 10 ? "0" + month.toString() : month.toString()
+          }-${day < 10 ? "0" + day.toString() : day.toString()}T00:00:00`,
+        }),
+      });
+      const newBirthday = await res.json();
+      console.log("Create successful", { newBirthday });
+    }
   };
 
   const handleInput = (e) => {
@@ -51,6 +73,7 @@ function AdminCheck() {
     return (
       <div className={styles.wrap}>
         <h1 className={styles.heading}>Signed in as Admin</h1>
+        <p className={styles.message}>{isValidMessage}</p>
         <form className={styles.form}>
           <label htmlFor="name">
             <input

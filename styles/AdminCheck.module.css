@@ -26,6 +26,11 @@
   border: 0;
   margin-bottom: 2rem;
 }
+.message {
+  font-size: 11px;
+  text-align: center;
+  color: hsl(345, 95%, 68%);
+}
 .form {
   display: flex;
   gap: 1rem;
