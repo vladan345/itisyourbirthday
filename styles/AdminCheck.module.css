@@ -1,0 +1,53 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.heading {
+  text-align: center;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  margin-bottom: 2rem;
+}
+.button {
+  display: inline;
+  background-color: hsl(236, 21%, 26%);
+  color: hsl(345, 95%, 68%);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.3rem 0 #1c1720;
+  padding: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: "Red Hat Text", sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  border: 0;
+  margin-bottom: 2rem;
+}
+.form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.form label {
+  text-transform: uppercase;
+  color: #8486a9;
+  margin-top: 1rem;
+  font-size: 0.7rem;
+  text-align: center;
+  letter-spacing: 5px;
+}
+.form label input {
+  display: block;
+  background-color: hsl(236, 21%, 26%);
+  color: hsl(345, 95%, 68%);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.3rem 0 #1c1720;
+  padding: 20px;
+  font-weight: bold;
+  border: 0;
+  margin-bottom: 0.5rem;
+  outline: none;
+}

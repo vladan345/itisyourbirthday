@@ -63,6 +63,7 @@ h2 {
 div.bgOpened {
   background-color: rgba(0, 0, 0, 0.7);
   pointer-events: auto;
+  z-index: 4;
 }
 
 .hamMenu {

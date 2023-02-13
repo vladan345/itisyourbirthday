@@ -1,0 +1,19 @@
+.backBtn {
+  width: 45px;
+  height: 40px;
+  background-color: hsl(236, 21%, 26%);
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 85px;
+  z-index: 11;
+  box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.backBtn img {
+  filter: invert(54%) sepia(85%) saturate(2047%) hue-rotate(309deg)
+    brightness(99%) contrast(98%);
+}

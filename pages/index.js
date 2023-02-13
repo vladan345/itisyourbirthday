@@ -19,7 +19,7 @@ export default function Home() {
         <Clock />
         <Footer />
         <BirthdayList />
-        <Link href="/user" className="userLink">
+        <Link href="/admin" className="userLink">
           <Image width={30} height={30} src="/user-icon.svg" alt="user icon" />
         </Link>
       </div>

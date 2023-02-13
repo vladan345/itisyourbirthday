@@ -1,4 +1,4 @@
-import { createBirthday } from "../../prisma/Birthday";
+import { createBirthday } from "../../prisma/BirthdayDev";
 import { getSession } from "next-auth/react";
 export default async function handle(req, res) {
   // Get the current session data with {user, email, id}
