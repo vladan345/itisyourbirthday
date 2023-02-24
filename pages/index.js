@@ -6,7 +6,7 @@ import Clock from "@/components/Clock";
 import Footer from "@/components/Footer";
 import BirthdayList from "@/components/BirthdayList";
 
-export default function Home() {
+export default function Home({ birthdays }) {
   return (
     <>
       <Head>
@@ -16,13 +16,32 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="App">
-        <Clock />
+        <Clock birthdays={birthdays} />
         <Footer />
-        <BirthdayList />
+        <BirthdayList list={birthdays} />
         <Link href="/admin" className="userLink">
           <Image width={30} height={30} src="/user-icon.svg" alt="user icon" />
         </Link>
       </div>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const url =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://itisyourbirthday.vercel.app";
+
+  let res = await fetch(url + "/api/getBirthdays")
+    .then((res) => res.json())
+    .then((data) => {
+      return data;
+    });
+
+  let birthdays = await res;
+
+  return {
+    props: { birthdays },
+  };
 }

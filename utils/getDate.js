@@ -1,94 +1,6 @@
 var year = new Date().getFullYear();
-export let birthdays = [
-  {
-    id: 0,
-    year: year,
-    name: "Tara",
-    date: `${year}-01-19T00:00:00`,
-  },
-  {
-    id: 1,
-    year: year,
-    name: "Teodora",
-    date: `${year}-01-30T00:00:00`,
-  },
-  {
-    id: 2,
-    year: year,
-    name: "Ficko",
-    date: `${year}-02-15T00:00:00`,
-  },
-  {
-    id: 3,
-    year: year,
-    name: "Alex Zr",
-    date: `${year}-02-18T00:00:00`,
-  },
-  {
-    id: 4,
-    year: year,
-    name: "Dusan(Avala)",
-    date: `${year}-02-27T00:00:00`,
-  },
-  {
-    id: 5,
-    year: year,
-    name: "Natalija",
-    date: `${year}-03-29T00:00:00`,
-  },
-  {
-    id: 6,
-    year: year,
-    name: "Vladan",
-    date: `${year}-04-10T00:00:00`,
-  },
-  {
-    id: 7,
-    year: year,
-    name: "Ilija",
-    date: `${year}-04-17T00:00:00`,
-  },
-  {
-    id: 9,
-    year: year,
-    name: "Fica",
-    date: `${year}-08-20T00:00:00`,
-  },
-  {
-    id: 11,
-    year: year,
-    name: "Alex",
-    date: `${year}-10-12T00:00:00`,
-  },
-  {
-    id: 12,
-    year: year,
-    name: "Tonic",
-    date: `${year}-10-21T00:00:00`,
-  },
-  {
-    id: 13,
-    year: year,
-    name: "Flora",
-    date: `${year}-11-28T00:00:00`,
-  },
-  {
-    id: 14,
-    year: year,
-    name: "Dimi",
-    date: `${year}-12-04T00:00:00`,
-  },
-  {
-    id: 15,
-    year: year,
-    name: "Dusan(Souly) and Toza",
-    date: `${year}-12-12T00:00:00`,
-  },
-];
+var end;
 
-let dataObject = {
-  newDate: null,
-};
 export let name = "";
 
 var counter = 0;
@@ -96,15 +8,16 @@ var counter = 0;
 //THERE ARE NO BIRTHDAYS LEFT THIS YEAR.
 //IN THAT CASE WE NEED TO CHANGE CURRENT YEAR SO THE PROGRAM
 //CAN CHECK NEXT BIRTHDAY IN THE BEGGINING OF THE NEXT YEAR.
-function getBirthday(array) {
+export function getBirthday(array) {
   loopDates(array);
+  //THIS IS IF THERE ARE NO MORE BIRTHDAYS THIS YEAR
   if (counter === array.length) {
+    console.log("yes");
     year++;
     let newArray = changeYear([...array]);
     loopDates(newArray);
   }
 }
-getBirthday(birthdays);
 
 //THIS FUNCTION MAKES NEW ARRAY WITH ALL DATES WITH NEW YEAR.
 function changeYear(oldArray) {
@@ -124,7 +37,8 @@ function loopDates(dateArray) {
     var checkDate = new Date(dateArray[i].date);
     var choosenName = dateArray[i].name;
     if (checkDate > today) {
-      dataObject.newDate = checkDate;
+      //MUSTN'T BE NULL
+      end = new Date(checkDate);
       name = choosenName;
       break;
     } else {
@@ -133,28 +47,28 @@ function loopDates(dateArray) {
   }
 }
 
-var end = new Date(dataObject.newDate);
-
 var second = 1000;
 var minute = second * 60;
 var hour = minute * 60;
 var day = hour * 24;
 
 export function showRemaining() {
-  var now = new Date();
-  var distance = end - now;
+  if (end !== undefined) {
+    var now = new Date();
+    var distance = end - now;
 
-  var days = Math.floor(distance / day);
-  var hours = Math.floor((distance % day) / hour);
-  var minutes = Math.floor((distance % hour) / minute);
-  var seconds = Math.floor((distance % minute) / second);
+    var days = Math.floor(distance / day);
+    var hours = Math.floor((distance % day) / hour);
+    var minutes = Math.floor((distance % hour) / minute);
+    var seconds = Math.floor((distance % minute) / second);
 
-  let timeArr = [days, hours, minutes, seconds];
+    let timeArr = [days, hours, minutes, seconds];
 
-  for (let i in timeArr) {
-    if (timeArr[i] < 10) {
-      timeArr[i] = "0" + timeArr[i];
+    for (let i in timeArr) {
+      if (timeArr[i] < 10) {
+        timeArr[i] = "0" + timeArr[i];
+      }
     }
+    return timeArr;
   }
-  return timeArr;
 }

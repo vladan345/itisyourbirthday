@@ -1,18 +1,24 @@
 import React from "react";
 import styles from "../styles/Clock.module.css";
 import { useState, useEffect } from "react";
-import { showRemaining, name } from "../utils/getDate";
+import { showRemaining, name, getBirthday } from "../utils/getDate";
+import { sortByDate } from "@/utils/sort";
 
 import Unit from "./Unit";
 
-export default function Clock() {
+export default function Clock({ birthdays }) {
   const [time, setTime] = useState(["0" + 0, "0" + 0, "0" + 0, "0" + 0]);
-
+  const [isFired, setFired] = useState(false);
   useEffect(() => {
+    if (!isFired) {
+      getBirthday(sortByDate(birthdays));
+      setFired(true);
+    }
+
     setTimeout(() => {
       setTime(showRemaining);
     }, 1000);
-  }, [time]);
+  }, [time, isFired, birthdays]);
 
   return (
     <div className={styles.Clock}>

@@ -7,7 +7,6 @@ import BirthdayList from "@/components/BirthdayList";
 import styles from "../styles/admin.module.css";
 
 export default function User({ birthdays }) {
-  console.log(birthdays);
   return (
     <>
       <Head>
@@ -23,7 +22,7 @@ export default function User({ birthdays }) {
           />
         </Link>
         <AdminCheck />
-        <BirthdayList />
+        <BirthdayList list={birthdays} />
       </div>
     </>
   );
