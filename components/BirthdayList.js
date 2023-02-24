@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "../styles/BirthdayList.module.css";
-import { sortByDate } from "@/utils/sort";
+import { sortByDate } from "@/utils/helpers";
 
 function BirthdayList({ list }) {
   const [opened, setOpened] = useState(false);

@@ -1,12 +1,19 @@
+import { useState, useEffect } from "react";
+
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 
 import Clock from "@/components/Clock";
+import Celebrate from "@/components/Celebrate";
 import Footer from "@/components/Footer";
 import BirthdayList from "@/components/BirthdayList";
 
+import { checkCelebrate } from "@/utils/helpers";
+
 export default function Home({ birthdays }) {
+  const [name, setName] = useState(checkCelebrate(birthdays));
+
   return (
     <>
       <Head>
@@ -16,7 +23,12 @@ export default function Home({ birthdays }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="App">
-        <Clock birthdays={birthdays} />
+        {name !== "" ? (
+          <Celebrate name={name} />
+        ) : (
+          <Clock birthdays={birthdays} />
+        )}
+
         <Footer />
         <BirthdayList list={birthdays} />
         <Link href="/admin" className="userLink">

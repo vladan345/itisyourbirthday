@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/Clock.module.css";
 import { useState, useEffect } from "react";
 import { showRemaining, name, getBirthday } from "../utils/getDate";
-import { sortByDate } from "@/utils/sort";
+import { sortByDate } from "@/utils/helpers";
 
 import Unit from "./Unit";
 
@@ -22,7 +22,7 @@ export default function Clock({ birthdays }) {
 
   return (
     <div className={styles.Clock}>
-      <h1 className={styles.name}>It&apos;s {name}&apos;s birthday soon</h1>
+      <h1 className={styles.name}>It is {name}&apos;s birthday soon</h1>
       <div className={styles.timer}>
         <Unit unit="day" unitValue={time[0]} />
         <Unit unit="hour" unitValue={time[1]} />
