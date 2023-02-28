@@ -21,7 +21,7 @@ function AdminCheck() {
     } else if (!months.includes(parseInt(month)) && day > 30) {
       return "Choosen month has only 30 days.";
     } else {
-      return "";
+      return "New name has been added. Reload the page to see changes.";
     }
   };
 
@@ -85,18 +85,6 @@ function AdminCheck() {
             />
             Name
           </label>
-          <label htmlFor="month">
-            <input
-              type="number"
-              name="month"
-              id="month"
-              min="1"
-              max="12"
-              onChange={handleInput}
-              value={month}
-            />
-            Month
-          </label>
           <label htmlFor="day">
             <input
               type="number"
@@ -108,6 +96,18 @@ function AdminCheck() {
               value={day}
             />
             Day
+          </label>
+          <label htmlFor="month">
+            <input
+              type="number"
+              name="month"
+              id="month"
+              min="1"
+              max="12"
+              onChange={handleInput}
+              value={month}
+            />
+            Month
           </label>
         </form>
         <button className={styles.button} onClick={() => saveBirthday()}>

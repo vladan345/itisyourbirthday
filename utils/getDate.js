@@ -1,4 +1,4 @@
-var year = new Date().getFullYear();
+var year;
 var end;
 
 export let name = "";
@@ -9,6 +9,7 @@ var counter = 0;
 //IN THAT CASE WE NEED TO CHANGE CURRENT YEAR SO THE PROGRAM
 //CAN CHECK NEXT BIRTHDAY IN THE BEGGINING OF THE NEXT YEAR.
 export function getBirthday(array) {
+  year = new Date().getFullYear();
   loopDates(array);
   //THIS IS IF THERE ARE NO MORE BIRTHDAYS THIS YEAR
   if (counter === array.length) {
