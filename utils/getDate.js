@@ -13,7 +13,6 @@ export function getBirthday(array) {
   loopDates(array);
   //THIS IS IF THERE ARE NO MORE BIRTHDAYS THIS YEAR
   if (counter === array.length) {
-    console.log("yes");
     year++;
     let newArray = changeYear([...array]);
     loopDates(newArray);

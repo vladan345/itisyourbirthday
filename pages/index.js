@@ -8,11 +8,16 @@ import Clock from "@/components/Clock";
 import Celebrate from "@/components/Celebrate";
 import Footer from "@/components/Footer";
 import BirthdayList from "@/components/BirthdayList";
+import styles from "@/styles/Home.module.css";
 
 import { checkCelebrate } from "@/utils/helpers";
+import { birthdays } from "@/utils/BIRTHDAYS";
 
-export default function Home({ birthdays }) {
-  const [name, setName] = useState(checkCelebrate(birthdays));
+import prisma from "@/lib/prisma";
+// import { useSession, signIn, signOut } from "next-auth/react";
+
+export default function Home({ birthdayList }) {
+  const [name, setName] = useState(checkCelebrate(birthdayList));
 
   return (
     <>
@@ -23,37 +28,62 @@ export default function Home({ birthdays }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="App">
-        {name !== "" ? (
+        {/* {name !== "" ? (
           <Celebrate name={name} />
         ) : (
-          <Clock birthdays={birthdays} />
-        )}
-
+          <Clock birthdays={birthdayList} />
+        )} */}
+        <div className={styles.login}>
+          <h1>It is your birthday.</h1>
+          <p>Please log in to see your upcoming birthdays</p>
+          {/* <button onClick={() => signIn()}></button> */}
+          {/* <form className={styles.form}>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Enter your email . . ."
+            />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter your password . . ."
+            />
+            <input type="submit" value="Login" />
+          </form> */}
+        </div>
         <Footer />
-        <BirthdayList list={birthdays} />
-        <Link href="/admin" className="userLink">
+        <BirthdayList list={birthdayList} />
+        {/* <Link href="/admin" className="userLink">
           <Image width={30} height={30} src="/user-icon.svg" alt="user icon" />
-        </Link>
+        </Link> */}
       </div>
     </>
   );
 }
 
-export async function getServerSideProps() {
-  const url =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3000"
-      : "https://itisyourbirthday.vercel.app";
-
-  let res = await fetch(url + "/api/getBirthdays")
-    .then((res) => res.json())
-    .then((data) => {
-      return data;
-    });
-
-  let birthdays = await res;
-
+export const getStaticProps = async () => {
+  const birthdayList = await prisma.birthday.findMany();
   return {
-    props: { birthdays },
+    props: { birthdayList },
   };
-}
+};
+// export async function getServerSideProps() {
+//   const url =
+//     process.env.NODE_ENV === "development"
+//       ? "http://localhost:3000"
+//       : "https://itisyourbirthday.vercel.app";
+
+//   let res = await fetch(url + "/api/getBirthdays")
+//     .then((res) => res.json())
+//     .then((data) => {
+//       return data;
+//     });
+
+//   let birthdays = await res;
+
+//   return {
+//     props: { birthdays },
+//   };
+// }

@@ -23,7 +23,6 @@ export function checkCelebrate(array) {
         name = birthday.name;
       }
     });
-
     return name;
   }
 }
