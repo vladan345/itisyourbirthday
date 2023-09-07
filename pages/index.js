@@ -14,10 +14,23 @@ import { checkCelebrate } from "@/utils/helpers";
 import { birthdays } from "@/utils/BIRTHDAYS";
 
 import prisma from "@/lib/prisma";
-import { signIn } from "next-auth/react";
+import { signIn, useSession, signOut } from "next-auth/react";
 
 export default function Home({ birthdayList }) {
+  const { data: session, status } = useSession();
+
   const [name, setName] = useState(checkCelebrate(birthdayList));
+  const [userInfo, setUserInfo] = useState({ email: "", password: "" });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    signIn("credentials", {
+      email: userInfo.email,
+      password: userInfo.password,
+      redirect: false,
+    });
+  };
 
   return (
     <>
@@ -27,32 +40,59 @@ export default function Home({ birthdayList }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {/*spinner */}
+      {status === "loading" && <div>Spinner</div>}
       <div className="App">
         {/* {name !== "" ? (
           <Celebrate name={name} />
         ) : (
           <Clock birthdays={birthdayList} />
         )} */}
-        <div className={styles.login}>
-          <h1>It is your birthday.</h1>
-          <p>Please log in to see your upcoming birthdays</p>
-          <button onClick={() => signIn()}>Login</button>
-          {/* <form className={styles.form}>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Enter your email . . ."
-            />
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Enter your password . . ."
-            />
-            <input type="submit" value="Login" />
-          </form> */}
-        </div>
+
+        {/* LOGIN */}
+        {!session && (
+          <div className={styles.login}>
+            <h1>It is your birthday.</h1>
+            <p>Please log in to see your upcoming birthdays</p>
+
+            <form className={styles.form} onSubmit={handleSubmit}>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Enter your email . . ."
+                value={userInfo.email}
+                onChange={({ target }) =>
+                  setUserInfo({ ...userInfo, email: target.value })
+                }
+              />
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Enter your password . . ."
+                value={userInfo.password}
+                onChange={({ target }) =>
+                  setUserInfo({ ...userInfo, password: target.value })
+                }
+              />
+              <input type="submit" value="Login" />
+            </form>
+          </div>
+        )}
+        {session && (
+          <div>
+            <h1>{session.user.email}</h1>
+            <Clock birthdays={birthdayList} />
+            <button
+              onClick={() => {
+                signOut;
+              }}
+            >
+              Sign out
+            </button>
+          </div>
+        )}
         <Footer />
         <BirthdayList list={birthdayList} />
         {/* <Link href="/admin" className="userLink">
