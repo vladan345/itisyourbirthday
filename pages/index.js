@@ -14,7 +14,7 @@ import { checkCelebrate } from "@/utils/helpers";
 import { birthdays } from "@/utils/BIRTHDAYS";
 
 import prisma from "@/lib/prisma";
-// import { useSession, signIn, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 export default function Home({ birthdayList }) {
   const [name, setName] = useState(checkCelebrate(birthdayList));
@@ -36,7 +36,7 @@ export default function Home({ birthdayList }) {
         <div className={styles.login}>
           <h1>It is your birthday.</h1>
           <p>Please log in to see your upcoming birthdays</p>
-          {/* <button onClick={() => signIn()}></button> */}
+          <button onClick={() => signIn()}>Login</button>
           {/* <form className={styles.form}>
             <input
               type="email"
