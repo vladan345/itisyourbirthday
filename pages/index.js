@@ -20,14 +20,14 @@ export default function Home({ birthdayList }) {
   const { data: session, status } = useSession();
 
   const [name, setName] = useState(checkCelebrate(birthdayList));
-  const [userInfo, setUserInfo] = useState({ email: "", password: "" });
+  const [userInfo, setUserInfo] = useState({ email: "", username: "" });
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     signIn("credentials", {
       email: userInfo.email,
-      password: userInfo.password,
+      username: userInfo.username,
       redirect: false,
     });
   };
@@ -57,13 +57,13 @@ export default function Home({ birthdayList }) {
 
             <form className={styles.form} onSubmit={handleSubmit}>
               <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Enter your email . . ."
-                value={userInfo.email}
+                type="text"
+                name="username"
+                id="username"
+                placeholder="Enter your username . . ."
+                value={userInfo.username}
                 onChange={({ target }) =>
-                  setUserInfo({ ...userInfo, email: target.value })
+                  setUserInfo({ ...userInfo, username: target.value })
                 }
               />
               <input
@@ -78,6 +78,17 @@ export default function Home({ birthdayList }) {
               />
               <input type="submit" value="Login" />
             </form>
+
+            <div className={styles.register}>
+              Don&apos;t have an account?
+              <Link
+                href="https://www.frontendmentor.io?ref=challenge"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Register here
+              </Link>
+            </div>
           </div>
         )}
         {session && (

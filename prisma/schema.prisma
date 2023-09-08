@@ -51,8 +51,9 @@ model Session {
 model User {
   id            String       @default(cuid()) @id
   name          String?
-  email         String?   @unique
-  birthdays         Birthday[]
+  username      String?   @unique
+  password      String?
+  birthdays     Birthday[]
   accounts      Account[]
   sessions      Session[]
   @@map(name: "users")
