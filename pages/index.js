@@ -20,14 +20,14 @@ export default function Home({ birthdayList }) {
   const { data: session, status } = useSession();
 
   const [name, setName] = useState(checkCelebrate(birthdayList));
-  const [userInfo, setUserInfo] = useState({ email: "", username: "" });
+  const [userInfo, setUserInfo] = useState({ email: "", email: "" });
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     signIn("credentials", {
       email: userInfo.email,
-      username: userInfo.username,
+      email: userInfo.email,
       redirect: false,
     });
   };
@@ -58,12 +58,12 @@ export default function Home({ birthdayList }) {
             <form className={styles.form} onSubmit={handleSubmit}>
               <input
                 type="text"
-                name="username"
-                id="username"
-                placeholder="Enter your username . . ."
-                value={userInfo.username}
+                name="email"
+                id="email"
+                placeholder="Enter your email . . ."
+                value={userInfo.email}
                 onChange={({ target }) =>
-                  setUserInfo({ ...userInfo, username: target.value })
+                  setUserInfo({ ...userInfo, email: target.value })
                 }
               />
               <input
