@@ -81,13 +81,7 @@ export default function Home({ birthdayList }) {
 
             <div className={styles.register}>
               Don&apos;t have an account?
-              <Link
-                href="https://www.frontendmentor.io?ref=challenge"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Register here
-              </Link>
+              <Link href="/register">Register here</Link>
             </div>
           </div>
         )}
@@ -106,9 +100,6 @@ export default function Home({ birthdayList }) {
         )}
         <Footer />
         <BirthdayList list={birthdayList} />
-        {/* <Link href="/admin" className="userLink">
-          <Image width={30} height={30} src="/user-icon.svg" alt="user icon" />
-        </Link> */}
       </div>
     </>
   );
