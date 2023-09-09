@@ -14,20 +14,20 @@ import { checkCelebrate } from "@/utils/helpers";
 import { birthdays } from "@/utils/BIRTHDAYS";
 
 import prisma from "@/lib/prisma";
-import { signIn, useSession, signOut } from "next-auth/react";
+import { signIn, useSession, signOut, getSession } from "next-auth/react";
 
 export default function Home({ birthdayList }) {
   const { data: session, status } = useSession();
 
   const [name, setName] = useState(checkCelebrate(birthdayList));
-  const [userInfo, setUserInfo] = useState({ email: "", email: "" });
+  const [userInfo, setUserInfo] = useState({ email: "", password: "" });
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     signIn("credentials", {
       email: userInfo.email,
-      email: userInfo.email,
+      password: userInfo.password,
       redirect: false,
     });
   };
@@ -40,9 +40,14 @@ export default function Home({ birthdayList }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/*spinner */}
-      {status === "loading" && <div>Spinner</div>}
+
       <div className="App">
+        {/*spinner */}
+        {status === "loading" && (
+          <div className="spinnerWrap">
+            <div className="dark"></div> <div className="light"></div>
+          </div>
+        )}
         {/* {name !== "" ? (
           <Celebrate name={name} />
         ) : (
@@ -87,14 +92,22 @@ export default function Home({ birthdayList }) {
         )}
         {session && (
           <div>
-            <h1>{session.user.email}</h1>
+            <h1 className={styles.userName}>
+              Welcome back, <span>{session.session.user?.name}</span>
+            </h1>
             <Clock birthdays={birthdayList} />
             <button
+              className="userLink"
               onClick={() => {
-                signOut;
+                signOut();
               }}
             >
-              Sign out
+              <Image
+                width={25}
+                height={25}
+                src="/power-off-solid.svg"
+                alt="user icon"
+              />
             </button>
           </div>
         )}

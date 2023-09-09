@@ -86,7 +86,7 @@ function Register() {
                 setUserInfo({ ...userInfo, password: target.value })
               }
             />
-            <input type="submit" value="Login" />
+            <input type="submit" value="Register" />
           </form>
 
           {userCreated.isCreated && (
