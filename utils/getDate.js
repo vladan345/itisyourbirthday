@@ -1,5 +1,4 @@
 var year;
-var end;
 
 export let name = "";
 
@@ -9,14 +8,16 @@ var counter = 0;
 //IN THAT CASE WE NEED TO CHANGE CURRENT YEAR SO THE PROGRAM
 //CAN CHECK NEXT BIRTHDAY IN THE BEGGINING OF THE NEXT YEAR.
 export function getBirthday(array) {
+  var end;
   year = new Date().getFullYear();
-  loopDates(array);
+  end = loopDates(array);
   //THIS IS IF THERE ARE NO MORE BIRTHDAYS THIS YEAR
   if (counter === array.length) {
     year++;
     let newArray = changeYear([...array]);
-    loopDates(newArray);
+    end = loopDates(newArray);
   }
+  return end;
 }
 
 //THIS FUNCTION MAKES NEW ARRAY WITH ALL DATES WITH NEW YEAR.
@@ -38,9 +39,10 @@ function loopDates(dateArray) {
     var choosenName = dateArray[i].name;
     if (checkDate > today) {
       //MUSTN'T BE NULL
-      end = new Date(checkDate);
-      name = choosenName;
-      break;
+      return { end: new Date(checkDate), name: choosenName };
+      // end = new Date(checkDate);
+      // name = choosenName;
+      // break;
     } else {
       counter++;
     }
@@ -52,10 +54,10 @@ var minute = second * 60;
 var hour = minute * 60;
 var day = hour * 24;
 
-export function showRemaining() {
-  if (end !== undefined) {
+export function showRemaining(end) {
+  if (end.end !== undefined) {
     var now = new Date();
-    var distance = end - now;
+    var distance = end.end - now;
 
     var days = Math.floor(distance / day);
     var hours = Math.floor((distance % day) / hour);

@@ -26,7 +26,7 @@ async function loginUserHandler(req, res) {
         password: true,
       },
     });
-    console.log(user);
+
     if (user && user.password === hashPassword(password)) {
       // exclude password from json response
       return res.status(200).json(exclude(user, ["password"]));

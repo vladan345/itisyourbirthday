@@ -42,7 +42,7 @@ body {
   border-radius: 5px;
   border: 0;
   box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.1);
-  curosr: pointer;
+  cursor: pointer;
 }
 .userLink img {
   filter: invert(54%) sepia(85%) saturate(2047%) hue-rotate(309deg)

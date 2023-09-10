@@ -95,7 +95,11 @@ export default function Home({ birthdayList }) {
             <h1 className={styles.userName}>
               Welcome back, <span>{session.session.user?.name}</span>
             </h1>
-            <Clock birthdays={birthdayList} />
+            {name !== "" ? (
+              <Celebrate name={name} />
+            ) : (
+              <Clock birthdays={birthdayList} />
+            )}
             <button
               className="userLink"
               onClick={() => {
@@ -118,8 +122,19 @@ export default function Home({ birthdayList }) {
   );
 }
 
-export const getStaticProps = async () => {
-  const birthdayList = await prisma.birthday.findMany();
+export const getServerSideProps = async ({ req, res }) => {
+  const session = await getSession({ req });
+  if (!session) {
+    return {
+      props: { birthdayList: [] },
+    };
+  }
+  const userId = session.token.sub;
+  const birthdayList = await prisma.birthday.findMany({
+    where: {
+      userId: userId,
+    },
+  });
   return {
     props: { birthdayList },
   };
