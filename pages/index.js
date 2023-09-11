@@ -4,22 +4,14 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 
-import Clock from "@/components/Clock";
-import Celebrate from "@/components/Celebrate";
 import Footer from "@/components/Footer";
-import BirthdayList from "@/components/BirthdayList";
 import styles from "@/styles/Home.module.css";
 
-import { checkCelebrate } from "@/utils/helpers";
-import { birthdays } from "@/utils/BIRTHDAYS";
+import { signIn, useSession, signOut } from "next-auth/react";
 
-import prisma from "@/lib/prisma";
-import { signIn, useSession, signOut, getSession } from "next-auth/react";
-
-export default function Home({ birthdayList }) {
+export default function Home() {
   const { data: session, status } = useSession();
 
-  const [name, setName] = useState(checkCelebrate(birthdayList));
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
 
   const handleSubmit = (e) => {
@@ -28,7 +20,8 @@ export default function Home({ birthdayList }) {
     signIn("credentials", {
       email: userInfo.email,
       password: userInfo.password,
-      redirect: false,
+      callbackUrl: "/countdown",
+      redirect: true,
     });
   };
 
@@ -48,11 +41,6 @@ export default function Home({ birthdayList }) {
             <div className="dark"></div> <div className="light"></div>
           </div>
         )}
-        {/* {name !== "" ? (
-          <Celebrate name={name} />
-        ) : (
-          <Clock birthdays={birthdayList} />
-        )} */}
 
         {/* LOGIN */}
         {!session && (
@@ -95,11 +83,7 @@ export default function Home({ birthdayList }) {
             <h1 className={styles.userName}>
               Welcome back, <span>{session.session.user?.name}</span>
             </h1>
-            {name !== "" ? (
-              <Celebrate name={name} />
-            ) : (
-              <Clock birthdays={birthdayList} />
-            )}
+            <Link href="/countdown">Check next birthday</Link>
             <button
               className="userLink"
               onClick={() => {
@@ -116,44 +100,7 @@ export default function Home({ birthdayList }) {
           </div>
         )}
         <Footer />
-        <BirthdayList list={birthdayList} />
       </div>
     </>
   );
 }
-
-export const getServerSideProps = async ({ req, res }) => {
-  const session = await getSession({ req });
-  if (!session) {
-    return {
-      props: { birthdayList: [] },
-    };
-  }
-  const userId = session.token.sub;
-  const birthdayList = await prisma.birthday.findMany({
-    where: {
-      userId: userId,
-    },
-  });
-  return {
-    props: { birthdayList },
-  };
-};
-// export async function getServerSideProps() {
-//   const url =
-//     process.env.NODE_ENV === "development"
-//       ? "http://localhost:3000"
-//       : "https://itisyourbirthday.vercel.app";
-
-//   let res = await fetch(url + "/api/getBirthdays")
-//     .then((res) => res.json())
-//     .then((data) => {
-//       return data;
-//     });
-
-//   let birthdays = await res;
-
-//   return {
-//     props: { birthdays },
-//   };
-// }
