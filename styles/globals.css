@@ -28,7 +28,7 @@ body {
   align-items: center;
   flex-direction: column;
 }
-.userLink {
+.headerLink {
   display: flex;
   position: absolute;
   right: 85px;
@@ -44,9 +44,14 @@ body {
   box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
-.userLink img {
+button img,
+a img {
   filter: invert(54%) sepia(85%) saturate(2047%) hue-rotate(309deg)
     brightness(99%) contrast(98%);
+}
+
+.editButton {
+  right: 150px;
 }
 
 h2 {

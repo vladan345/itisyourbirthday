@@ -37,8 +37,10 @@ export default function Home() {
       <div className="App">
         {/*spinner */}
         {status === "loading" && (
-          <div className="spinnerWrap">
-            <div className="dark"></div> <div className="light"></div>
+          <div className="App">
+            <div className="spinnerWrap">
+              <div className="dark"></div> <div className="light"></div>
+            </div>
           </div>
         )}
 
@@ -85,7 +87,7 @@ export default function Home() {
             </h1>
             <Link href="/countdown">Check next birthday</Link>
             <button
-              className="userLink"
+              className="headerLink"
               onClick={() => {
                 signOut();
               }}

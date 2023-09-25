@@ -1,0 +1,116 @@
+.form {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  margin-top: 60px;
+}
+.form input {
+  display: block;
+  width: 100%;
+  background-color: hsl(236, 21%, 26%);
+  color: hsl(345, 95%, 68%);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.3rem 0 #1c1720;
+  padding: 20px;
+  font-weight: bold;
+}
+.form input:not([type="submit"]) {
+  border: 0;
+  margin-bottom: 0.5rem;
+  outline: none;
+}
+.form input[type="submit"] {
+  display: inline;
+
+  cursor: pointer;
+  font-family: "Red Hat Text", sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  border: 0;
+}
+.login {
+  text-align: center;
+}
+.register {
+  font-size: 11px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.register a {
+  color: #fb6087;
+  margin-left: 3px;
+}
+.userName {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  margin-bottom: 2rem;
+}
+.userName span {
+  color: #fb6087;
+}
+
+.addButton {
+  display: block;
+  background-color: hsl(236, 21%, 26%);
+  color: hsl(345, 95%, 68%);
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.3rem 0 #1c1720;
+  padding: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.createForm {
+  width: 100vw;
+  height: 100%;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 11111;
+}
+
+.createForm input {
+  display: block;
+  width: 300px;
+  background-color: hsl(236, 21%, 26%);
+  color: hsl(345, 95%, 68%);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.3rem 0 #1c1720;
+  padding: 20px;
+  font-weight: bold;
+  border: none;
+}
+
+.formHeading {
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  background: none;
+  border: none;
+  margin-bottom: 2rem;
+}
+.createForm select {
+  background-color: hsl(236, 21%, 26%);
+  color: hsl(345, 95%, 68%);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.3rem 0 #1c1720;
+  padding: 20px;
+  font-weight: bold;
+  border: none;
+  font-weight: bold;
+}
+.formRow {
+  display: flex;
+  gap: 20px;
+}

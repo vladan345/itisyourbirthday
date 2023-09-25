@@ -37,7 +37,7 @@ function Countdown({ birthdayList }) {
           <Clock birthdays={birthdayList} />
         )}
         <button
-          className="userLink"
+          className="headerLink"
           onClick={() => {
             signOut({ callbackUrl: "/" });
           }}
@@ -49,6 +49,9 @@ function Countdown({ birthdayList }) {
             alt="user icon"
           />
         </button>
+        <Link className="headerLink editButton" href="/edit">
+          <Image width={25} height={25} src="/pen-solid.svg" alt="edit icon" />
+        </Link>
         <Footer />
         <BirthdayList list={birthdayList} />
       </div>
