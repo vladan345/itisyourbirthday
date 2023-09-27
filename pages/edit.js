@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSession, getSession } from "next-auth/react";
+import { sortByDate } from "@/utils/helpers";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -45,6 +46,8 @@ function Edit({ birthdayList, userId }) {
 
   const [selectedDay, setSelectedDay] = useState("01");
   const [selectedMonth, setSelectedMonth] = useState("01");
+
+  const [selectedBirthday, setSelectedBirthday] = useState();
 
   const [createBirthday, setCreateBirthday] = useState({
     userId: userId,
@@ -149,6 +152,23 @@ function Edit({ birthdayList, userId }) {
     }
   };
 
+  const handleDelete = async () => {
+    if (selectedBirthday) {
+      const res = await fetch("/api/birthday/delete", {
+        method: "POST",
+        body: JSON.stringify(selectedBirthday),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+      window.location.reload();
+    }
+  };
+
   return (
     <>
       <Head>
@@ -213,21 +233,65 @@ function Edit({ birthdayList, userId }) {
                 Submit
               </button>
             </div>
+            <button
+              className={styles.addButton}
+              onClick={() => setAddOpen(false)}
+            >
+              <Image
+                src="/xmark-solid.svg"
+                alt="close button"
+                width={25}
+                height={25}
+              />
+            </button>
           </div>
         )}
+        <div className={styles.list}>
+          {birthdayList &&
+            sortByDate(birthdayList).map((birthday) => {
+              let month = parseInt(birthday.date[5] + birthday.date[6]);
+              let day = birthday.date[8] + birthday.date[9];
+              return (
+                <div
+                  key={birthday.id}
+                  className={`${styles.row} ${
+                    birthday.id == selectedBirthday ? styles.active : null
+                  }`}
+                  onClick={() => {
+                    setSelectedBirthday(birthday.id);
+                  }}
+                >
+                  <p className={styles.name}>{birthday.name}</p>
+                  <div className={styles.menuDate}>
+                    <p className={styles.menuMonth}>{months[month - 1]}</p>
+                    <p className={styles.menuDay}>{day}</p>
+                  </div>
+                </div>
+              );
+            })}
+        </div>
 
-        <button
-          className={styles.addButton}
-          onClick={() => setAddOpen(!addOpen)}
-        >
-          <Image
-            src="/plus-solid.svg"
-            alt="add button"
-            width={25}
-            height={25}
-          />
-        </button>
-
+        <div className={styles.buttons}>
+          <button
+            className={styles.addButton}
+            onClick={() => setAddOpen(!addOpen)}
+          >
+            <Image
+              src="/plus-solid.svg"
+              alt="add button"
+              width={25}
+              height={25}
+            />
+          </button>
+          <button className={styles.addButton} onClick={handleDelete}>
+            <Image
+              src="/trash-solid.svg"
+              alt="delete button"
+              width={25}
+              height={25}
+            />
+          </button>
+        </div>
         <button
           className="headerLink"
           onClick={() => {
