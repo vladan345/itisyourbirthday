@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSession, getSession } from "next-auth/react";
+import { useSession, getSession, signOut } from "next-auth/react";
 import { sortByDate } from "@/utils/helpers";
 
 import Image from "next/image";
