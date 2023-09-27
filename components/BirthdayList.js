@@ -53,7 +53,7 @@ function BirthdayList({ list }) {
               let month = parseInt(birthday.date[5] + birthday.date[6]);
               let day = birthday.date[8] + birthday.date[9];
               return (
-                <div key={birthday._id} className={styles.row}>
+                <div key={birthday.id} className={styles.row}>
                   <p className={styles.name}>{birthday.name}</p>
                   <div className={styles.menuDate}>
                     <p className={styles.menuMonth}>{months[month - 1]}</p>

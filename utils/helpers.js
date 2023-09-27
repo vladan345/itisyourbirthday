@@ -1,4 +1,5 @@
 export function sortByDate(array) {
+  // console.log(array);
   let sorted = [...array];
   return sorted.sort(function (a, b) {
     // Turn your strings into dates, and then subtract them
@@ -23,7 +24,6 @@ export function checkCelebrate(array) {
         name = birthday.name;
       }
     });
-
     return name;
   }
 }

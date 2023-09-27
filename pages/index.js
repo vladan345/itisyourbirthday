@@ -4,15 +4,26 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 
-import Clock from "@/components/Clock";
-import Celebrate from "@/components/Celebrate";
 import Footer from "@/components/Footer";
-import BirthdayList from "@/components/BirthdayList";
+import styles from "@/styles/Home.module.css";
 
-import { checkCelebrate } from "@/utils/helpers";
+import { signIn, useSession, signOut } from "next-auth/react";
 
-export default function Home({ birthdays }) {
-  const [name, setName] = useState(checkCelebrate(birthdays));
+export default function Home() {
+  const { data: session, status } = useSession();
+
+  const [userInfo, setUserInfo] = useState({ email: "", password: "" });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    signIn("credentials", {
+      email: userInfo.email,
+      password: userInfo.password,
+      callbackUrl: "/countdown",
+      redirect: true,
+    });
+  };
 
   return (
     <>
@@ -22,38 +33,76 @@ export default function Home({ birthdays }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <div className="App">
-        {name !== "" ? (
-          <Celebrate name={name} />
-        ) : (
-          <Clock birthdays={birthdays} />
+        {/*spinner */}
+        {status === "loading" && (
+          <div className="App">
+            <div className="spinnerWrap">
+              <div className="dark"></div> <div className="light"></div>
+            </div>
+          </div>
         )}
 
+        {/* LOGIN */}
+        {!session && (
+          <div className={styles.login}>
+            <h1>It is your birthday.</h1>
+            <p>Please log in to see your upcoming birthdays</p>
+
+            <form className={styles.form} onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="email"
+                id="email"
+                placeholder="Enter your email . . ."
+                value={userInfo.email}
+                onChange={({ target }) =>
+                  setUserInfo({ ...userInfo, email: target.value })
+                }
+              />
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Enter your password . . ."
+                value={userInfo.password}
+                onChange={({ target }) =>
+                  setUserInfo({ ...userInfo, password: target.value })
+                }
+              />
+              <input type="submit" value="Login" />
+            </form>
+
+            <div className={styles.register}>
+              Don&apos;t have an account?
+              <Link href="/register">Register here</Link>
+            </div>
+          </div>
+        )}
+        {session && (
+          <div>
+            <h1 className={styles.userName}>
+              Welcome back, <span>{session.session.user?.name}</span>
+            </h1>
+            <Link href="/countdown">Check next birthday</Link>
+            <button
+              className="headerLink"
+              onClick={() => {
+                signOut();
+              }}
+            >
+              <Image
+                width={25}
+                height={25}
+                src="/power-off-solid.svg"
+                alt="user icon"
+              />
+            </button>
+          </div>
+        )}
         <Footer />
-        <BirthdayList list={birthdays} />
-        <Link href="/admin" className="userLink">
-          <Image width={30} height={30} src="/user-icon.svg" alt="user icon" />
-        </Link>
       </div>
     </>
   );
-}
-
-export async function getServerSideProps() {
-  const url =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3000"
-      : "https://itisyourbirthday.vercel.app";
-
-  let res = await fetch(url + "/api/getBirthdays")
-    .then((res) => res.json())
-    .then((data) => {
-      return data;
-    });
-
-  let birthdays = await res;
-
-  return {
-    props: { birthdays },
-  };
 }

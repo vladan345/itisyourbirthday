@@ -1,0 +1,80 @@
+export let birthdays = [
+  {
+    id: 1,
+    year: 2023,
+    name: "Teodora",
+    date: `${2023}-01-30T00:00:00`,
+  },
+  {
+    id: 2,
+    year: 2023,
+    name: "Ficko",
+    date: `${2023}-02-15T00:00:00`,
+  },
+  {
+    id: 3,
+    year: 2023,
+    name: "Alex Zr",
+    date: `${2023}-02-18T00:00:00`,
+  },
+  {
+    id: 4,
+    year: 2023,
+    name: "Dusan(Avala)",
+    date: `${2023}-02-27T00:00:00`,
+  },
+  {
+    id: 5,
+    year: 2023,
+    name: "Natalija",
+    date: `${2023}-03-29T00:00:00`,
+  },
+  {
+    id: 6,
+    year: 2023,
+    name: "Vladan",
+    date: `${2023}-04-10T00:00:00`,
+  },
+  {
+    id: 7,
+    year: 2023,
+    name: "Ilija",
+    date: `${2023}-04-17T00:00:00`,
+  },
+  {
+    id: 9,
+    year: 2023,
+    name: "Fica",
+    date: `${2023}-08-20T00:00:00`,
+  },
+  {
+    id: 11,
+    year: 2023,
+    name: "Alex",
+    date: `${2023}-10-12T00:00:00`,
+  },
+  {
+    id: 12,
+    year: 2023,
+    name: "Tonic",
+    date: `${2023}-10-21T00:00:00`,
+  },
+  {
+    id: 13,
+    year: 2023,
+    name: "Flora",
+    date: `${2023}-11-28T00:00:00`,
+  },
+  {
+    id: 14,
+    year: 2023,
+    name: "Dimi",
+    date: `${2023}-12-04T00:00:00`,
+  },
+  {
+    id: 15,
+    year: 2023,
+    name: "Dusan(Souly) and Toza",
+    date: `${2023}-12-12T00:00:00`,
+  },
+];

@@ -28,7 +28,7 @@ body {
   align-items: center;
   flex-direction: column;
 }
-.userLink {
+.headerLink {
   display: flex;
   position: absolute;
   right: 85px;
@@ -40,11 +40,18 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+  border: 0;
   box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
-.userLink img {
+button img,
+a img {
   filter: invert(54%) sepia(85%) saturate(2047%) hue-rotate(309deg)
     brightness(99%) contrast(98%);
+}
+
+.editButton {
+  right: 150px;
 }
 
 h2 {
@@ -182,6 +189,59 @@ div.menuOpened {
   -webkit-animation: skewMeBottom 0.3s;
   animation: skewMeBottom 0.3s;
   z-index: 4;
+}
+
+.spinnerWrap {
+  border-radius: 0.5rem;
+  background: #343650;
+  width: 100px;
+  height: 100px;
+  z-index: 11111;
+  box-shadow: 0 0.3rem 0 #1c1720;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  overflow: hidden;
+}
+.light {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #dd5577;
+  width: 150%;
+  height: 150%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  animation: alternateSize 2s infinite;
+}
+.dark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #343650;
+  width: 150%;
+  height: 150%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  animation: alternateSize 2s 1s infinite;
+}
+@keyframes alternateSize {
+  0% {
+    z-index: 1;
+    width: 0;
+    height: 0;
+  }
+  50% {
+    z-index: 2;
+    width: 150%;
+    height: 150%;
+  }
+  100% {
+    z-index: 1;
+    width: 150%;
+    height: 150%;
+  }
 }
 
 @-webkit-keyframes skewMe {

@@ -1,0 +1,62 @@
+.form {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  margin-top: 60px;
+}
+.form input {
+  display: block;
+  width: 100%;
+  background-color: hsl(236, 21%, 26%);
+  color: hsl(345, 95%, 68%);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.3rem 0 #1c1720;
+  padding: 20px;
+  font-weight: bold;
+}
+.form input:not([type="submit"]) {
+  border: 0;
+  margin-bottom: 0.5rem;
+  outline: none;
+}
+.form input[type="submit"] {
+  display: inline;
+
+  cursor: pointer;
+  font-family: "Red Hat Text", sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  border: 0;
+}
+.login {
+  text-align: center;
+  width: 100%;
+  max-width: 340px;
+}
+.register {
+  font-size: 11px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.register a {
+  color: #fb6087;
+  margin-left: 3px;
+}
+.success {
+  background: rgb(6, 90, 10);
+  padding: 20px;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.3rem 0 #003107;
+  margin-top: 20px;
+}
+.success a {
+  color: #fb6087;
+}
+.fail {
+  background: rgb(90, 6, 6);
+  padding: 20px;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.3rem 0 #310000;
+  margin-top: 20px;
+}
