@@ -106,7 +106,7 @@ function Register() {
           </div>
         </div>
       </div>
-      <Link href="/" className="userLink">
+      <Link href="/" className="headerLink">
         <Image
           width={30}
           height={30}

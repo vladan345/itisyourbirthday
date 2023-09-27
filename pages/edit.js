@@ -38,6 +38,7 @@ function Edit({ birthdayList, userId }) {
   // const [userId, setUserId] = useState("");
   const [input, setInput] = useState("");
   const [addOpen, setAddOpen] = useState(false);
+  const [updateOpen, setUpdateOpen] = useState(false);
 
   const [days, setDays] = useState([
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
@@ -47,7 +48,8 @@ function Edit({ birthdayList, userId }) {
   const [selectedDay, setSelectedDay] = useState("01");
   const [selectedMonth, setSelectedMonth] = useState("01");
 
-  const [selectedBirthday, setSelectedBirthday] = useState();
+  const [selectedBirthday, setSelectedBirthday] = useState("");
+  // const [selectedBirthdayData, setSelectedBirthdayData] = useState({});
 
   const [createBirthday, setCreateBirthday] = useState({
     userId: userId,
@@ -59,20 +61,31 @@ function Edit({ birthdayList, userId }) {
   //   session ? setUserId(session.token.sub) : null;
   // }, [session, userId, input, createBirthday]);
 
-  //   const handleChange = async () => {
-  //     const res = await fetch("/api/birthday/update", {
-  //       method: "POST",
-  //       body: JSON.stringify({ id: "clm3cfm1m0006v840zia9d5kp", input }),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         console.log(data);
-  //       });
-  //     window.location.reload();
-  //   };
+  // const handleEdit = () => {
+  //   if (birthdayList && selectedBirthday) {
+  //     setUpdateOpen(!updateOpen);
+  //     const filtered = birthdayList.filter(
+  //       (birthday) => birthday.id == selectedBirthday
+  //     );
+  //     setSelectedBirthdayData(filtered[0]);
+  //   } else {
+  //     alert("Please select one birthday to edit");
+  //   }
+  // };
+
+  // const handleChange = async () => {
+  //   const res = await fetch("/api/birthday/update", {
+  //     method: "POST",
+  //     body: JSON.stringify({ id: "clm3cfm1m0006v840zia9d5kp", input }),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //     });
+  // };
 
   const handleDate = ({ target }) => {
     let year = new Date().getFullYear();
@@ -166,6 +179,8 @@ function Edit({ birthdayList, userId }) {
           console.log(data);
         });
       window.location.reload();
+    } else {
+      alert("Please select one birthday to delete");
     }
   };
 
@@ -177,7 +192,7 @@ function Edit({ birthdayList, userId }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="App">
+      <div className="App Edit">
         <h1 className={styles.userName}>
           Welcome back, <span>{session?.session.user.name}</span>
         </h1>
@@ -246,6 +261,69 @@ function Edit({ birthdayList, userId }) {
             </button>
           </div>
         )}
+
+        {/* {updateOpen && selectedBirthdayData ? (
+          <div className={styles.createForm}>
+            <span className={styles.formHeading}>Edit birthday</span>
+            <div className={styles.formRow}>
+              <input
+                className={styles.name}
+                type="text"
+                value={selectedBirthdayData.name}
+                placeholder={selectedBirthdayData.name}
+                onChange={({ target }) =>
+                  setSelectedBirthdayData({
+                    ...selectedBirthdayData,
+                    name: target.value,
+                  })
+                }
+              />
+              <select
+                name="month"
+                className={styles.dropdown}
+                onChange={handleDate}
+              >
+                {months &&
+                  months.map((month) => {
+                    return (
+                      <option value={month} key={month}>
+                        {month}
+                      </option>
+                    );
+                  })}
+              </select>
+              <select
+                name="day"
+                className={styles.dropdown}
+                onChange={handleDate}
+              >
+                {days != [] &&
+                  days.map((day) => {
+                    return (
+                      <option value={day} key={day}>
+                        {day}
+                      </option>
+                    );
+                  })}
+              </select>
+
+              <button className={styles.addButton} onClick={handleSubmitCreate}>
+                Submit
+              </button>
+            </div>
+            <button
+              className={styles.addButton}
+              onClick={() => setUpdateOpen(false)}
+            >
+              <Image
+                src="/xmark-solid.svg"
+                alt="close button"
+                width={25}
+                height={25}
+              />
+            </button>
+          </div>
+        ) : null} */}
         <div className={styles.list}>
           {birthdayList &&
             sortByDate(birthdayList).map((birthday) => {
@@ -283,6 +361,14 @@ function Edit({ birthdayList, userId }) {
               height={25}
             />
           </button>
+          {/* <button className={styles.addButton} onClick={handleEdit}>
+            <Image
+              src="/pen-solid.svg"
+              alt="edit button"
+              width={25}
+              height={25}
+            />
+          </button> */}
           <button className={styles.addButton} onClick={handleDelete}>
             <Image
               src="/trash-solid.svg"
@@ -313,7 +399,7 @@ function Edit({ birthdayList, userId }) {
             alt="celebrate icon"
           />
         </Link>
-        <Footer />
+        {/* <Footer /> */}
         <BirthdayList list={birthdayList} />
       </div>
     </>

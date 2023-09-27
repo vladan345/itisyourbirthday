@@ -55,3 +55,9 @@
 .userName span {
   color: #fb6087;
 }
+@media (max-width: 800px) {
+  .userName {
+    top: 100px;
+    width: 90vw;
+  }
+}

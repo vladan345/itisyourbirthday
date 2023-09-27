@@ -85,7 +85,14 @@ export default function Home() {
             <h1 className={styles.userName}>
               Welcome back, <span>{session.session.user?.name}</span>
             </h1>
-            <Link href="/countdown">Check next birthday</Link>
+            <Link className="headerLink homeButton" href="/countdown">
+              <Image
+                width={75}
+                height={75}
+                src="/cake-candles-solid.svg"
+                alt="celebrate icon"
+              />
+            </Link>
             <button
               className="headerLink"
               onClick={() => {
